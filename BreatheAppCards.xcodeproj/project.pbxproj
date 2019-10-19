@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E816A67235BB4B80061C6EE /* FlowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E816A66235BB4B80061C6EE /* FlowerView.swift */; };
 		0E897F6323428FAF0022A622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E897F6223428FAF0022A622 /* AppDelegate.swift */; };
 		0E897F6523428FAF0022A622 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E897F6423428FAF0022A622 /* SceneDelegate.swift */; };
 		0E897F6723428FAF0022A622 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E897F6623428FAF0022A622 /* ContentView.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E816A66235BB4B80061C6EE /* FlowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowerView.swift; sourceTree = "<group>"; };
 		0E897F5F23428FAF0022A622 /* BreatheAppCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreatheAppCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E897F6223428FAF0022A622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E897F6423428FAF0022A622 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				0E897F6423428FAF0022A622 /* SceneDelegate.swift */,
 				0E897F6623428FAF0022A622 /* ContentView.swift */,
 				0ED6AF2A235798C100375524 /* CardContentView.swift */,
+				0E816A66235BB4B80061C6EE /* FlowerView.swift */,
 				0ED6AF2C2357AED500375524 /* StyleGuide.swift */,
 				0ED6AF2E2357B5D700375524 /* Model.swift */,
 				0E897F6823428FB30022A622 /* Assets.xcassets */,
@@ -160,6 +163,7 @@
 				0E897F6523428FAF0022A622 /* SceneDelegate.swift in Sources */,
 				0ED6AF2F2357B5D700375524 /* Model.swift in Sources */,
 				0ED6AF2D2357AED500375524 /* StyleGuide.swift in Sources */,
+				0E816A67235BB4B80061C6EE /* FlowerView.swift in Sources */,
 				0E897F6723428FAF0022A622 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,18 +14,16 @@ enum CardPosition {
 }
 
 struct DraggableCardView: View {
-    @State var offset: CGPoint = CGPoint(x: 0, y: UIScreen.main.bounds.height*0.6)
+    @State var offset: CGPoint = CGPoint(x: 0, y: UIScreen.main.bounds.height*0.65)
     
     var contentView: CardContentView
-    var cardSize = CGSize(width: 320, height: 450)
-    
     var dragChanged: ((CGFloat) -> Void)?
     var dragEnded: ((CardPosition) -> Void)?
     
     private let minimumY: CGFloat = 0
     private var maximumY: CGFloat {
         get {
-            UIScreen.main.bounds.height*0.6
+            UIScreen.main.bounds.height*0.65
         }
     }
 
@@ -67,14 +65,14 @@ struct DraggableCardView: View {
             }
         }
         
-        return RoundedRectangle(cornerRadius: 8.0)
-            .foregroundColor(Color.cardGray)
-            .overlay(contentView)
-            .overlay(RoundedRectangle(cornerRadius: 8.0)
-            .strokeBorder(Color.textGray, style: StrokeStyle.init(lineWidth: 0.5)))
-            .frame(width: cardSize.width, height: cardSize.height)
-            .offset(x: 0, y: self.offset.y)
-            .gesture(dragGesture)
+        return
+             RoundedRectangle(cornerRadius: 8.0)
+             .foregroundColor(Color.cardGray)
+             .overlay(self.contentView)
+             .overlay(RoundedRectangle(cornerRadius: 8.0)
+             .strokeBorder(Color.textGray, style: StrokeStyle.init(lineWidth: 0.5)))
+             .offset(x: 0, y: self.offset.y)
+             .gesture(dragGesture)
     }
 }
 
@@ -92,6 +90,7 @@ struct Card: Identifiable {
 
 class CardStack: ObservableObject {
     @Published var allCards: [Card]
+    private var marginTop = 0.0
 
     var presentationPercentage: CGFloat {
         get {
@@ -140,9 +139,9 @@ class CardStack: ObservableObject {
          let bottomIndex = self.bottomnCards.firstIndex(where: {$0.id == card.id})
          
          if let index = bottomIndex {
-             return Double(index)
+             return marginTop + Double(index)
          } else if let index = topIndex {
-             return 20*Double(index)
+             return marginTop + 20*Double(index)
          }
          return 0
     }
@@ -150,15 +149,19 @@ class CardStack: ObservableObject {
 
 struct CardStackView: View {
     @ObservedObject var cardStack: CardStack
-
+    var width: CGFloat
+    var height: CGFloat
+    
     var body: some View {
-        ZStack {
-            ForEach(0..<self.cardStack.allCards.count) { i in
-                self.cardAt(i)
+        GeometryReader { geometry in
+            ZStack {
+                ForEach(0..<self.cardStack.allCards.count) { i in
+                    self.cardAt(i)
+                }
             }
-        }
+        }.frame(width: width, height: height)
     }
-            
+    
     func cardAt(_ i: Int) -> some View {
         let card = self.cardStack.allCards[i]
         let scale = CGFloat(self.cardStack.cardScale(card))
@@ -167,8 +170,8 @@ struct CardStackView: View {
         
         let cardView = DraggableCardView(contentView: CardContentView(exercise: Exercise.allExercises[i])
             , dragChanged: { percent in
-            self.cardStack.allCards[i].percentPresented = 1 - percent
-            self.cardStack.allCards[i].isDragging = true
+                self.cardStack.allCards[i].percentPresented = 1 - percent
+                self.cardStack.allCards[i].isDragging = true
         }, dragEnded: { position in
             self.cardStack.allCards[i].isDragging = false
             withAnimation{self.cardStack.allCards[i].position = position}
@@ -179,11 +182,12 @@ struct CardStackView: View {
         } else {
             zIndex = (card.position == .top) ? (self.cardStack.allCards.count - i - 1) : 0
         }
-        
+           
         return cardView
-        .offset(x: 0, y: offset)
-        .scaleEffect(scale)
-        .zIndex(Double(zIndex))
+            .frame(width: self.width*0.85, height: self.height*0.6)
+            .offset(y: offset)
+            .scaleEffect(scale)
+            .zIndex(Double(zIndex))
     }
     
 }
@@ -196,7 +200,9 @@ struct ContentView : View {
             Rectangle().background(Color.black)
             .animation(.easeIn(duration: 0.4))
             .opacity(Double(cardStack.presentationPercentage))
-            CardStackView(cardStack: cardStack)
+            GeometryReader { geometry in
+                CardStackView(cardStack: self.cardStack, width: geometry.size.width, height: geometry.size.height)
+            }
         }
     }
 }
