@@ -196,14 +196,16 @@ struct ContentView : View {
     @ObservedObject var cardStack = CardStack(numberOfCards: Exercise.allExercises.count)
     
     var body: some View {
-        ZStack {
-            Rectangle().background(Color.black)
-            .animation(.easeIn(duration: 0.4))
-            .opacity(Double(cardStack.presentationPercentage))
-            GeometryReader { geometry in
-                CardStackView(cardStack: self.cardStack, width: geometry.size.width, height: geometry.size.height)
+            ZStack {
+                 HomeView()
+                 Rectangle().background(Color.black)
+                 .animation(.easeIn(duration: 0.4))
+                 .opacity(Double(cardStack.presentationPercentage))
+                 GeometryReader { geometry in
+                     CardStackView(cardStack: self.cardStack, width: geometry.size.width, height: geometry.size.height)
+                 }
             }
-        }
+            .background(Color.gray)
     }
 }
 

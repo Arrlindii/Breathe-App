@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-struct GradientCircle: View {
+struct GradientView: View {
     var body: some View {
         let color1 = Color.init(red: 81/255, green: 204/255, blue: 159/255)
         let color2 = Color.init(red: 154/255, green: 255/255, blue: 248/255)
@@ -43,7 +43,7 @@ struct FlowerAnimatableView: AnimatableModifier {
         
         return ZStack {
             ForEach(Array(0..<numberOfSides), id: \.self) { i in
-                return GradientCircle()
+                return GradientView()
                     .frame(width: self.circleWidth(), height: self.circleWidth())
                     .opacity(self.getOpacity(at: i))
                     .offset(x: self.getOffset(at: i).x, y: self.getOffset(at: i).y)
