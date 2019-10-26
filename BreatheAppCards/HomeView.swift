@@ -16,10 +16,15 @@ struct HomeView: View {
         VStack {
             Spacer()
             Button(action: {
-                 withAnimation {self.percentage = 0.95}
+                withAnimation {self.percentage = 0.9}
              }) {
-                 Text("Test Button")
+                 Text("Increase Button")
              }
+            Button(action: {
+                withAnimation {self.percentage = 0.1}
+                     }) {
+                         Text("Reset Button")
+                     }
             DaysView()
                 .frame(height: 100)
             BackgroundCircle()
