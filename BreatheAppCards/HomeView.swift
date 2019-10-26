@@ -16,7 +16,7 @@ struct HomeView: View {
         VStack {
             Spacer()
             Button(action: {
-                withAnimation {self.percentage = 0.9}
+                withAnimation {self.percentage = 1.0}
              }) {
                  Text("Increase Button")
              }
@@ -27,9 +27,8 @@ struct HomeView: View {
                      }
             DaysView()
                 .frame(height: 100)
-            BackgroundCircle()
+            RingView(percentage: percentage, ringWidth: 50.0)
                 .animation(Animation.easeInOut(duration: 1.0))
-                .overlay(RingView(percentage: percentage), alignment: .center)
             Spacer()
         }
     }
@@ -53,8 +52,7 @@ struct DayView: View {
     var body: some View {
         VStack {
             Text("\(dayAbv)")
-            BackgroundCircle()
-                .overlay(RingView(percentage: Double.random(in: 0...1)), alignment: .center)
+            RingView(percentage: Double.random(in: 0...1), ringWidth: 10.0)
         }
     }
 }
