@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E752B372364FE7D002A08DE /* DaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E752B362364FE7D002A08DE /* DaysView.swift */; };
+		0E77DD62236E028100E0F964 /* ExcerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E77DD61236E028100E0F964 /* ExcerciseDetailView.swift */; };
+		0E77DD64236E0AB400E0F964 /* ExcerciseAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E77DD63236E0AB400E0F964 /* ExcerciseAnimationView.swift */; };
 		0E816A67235BB4B80061C6EE /* FlowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E816A66235BB4B80061C6EE /* FlowerView.swift */; };
 		0E816A69235BC9860061C6EE /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E816A68235BC9860061C6EE /* RingView.swift */; };
 		0E816A6B235BCA190061C6EE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E816A6A235BCA190061C6EE /* HomeView.swift */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E752B362364FE7D002A08DE /* DaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysView.swift; sourceTree = "<group>"; };
+		0E77DD61236E028100E0F964 /* ExcerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseDetailView.swift; sourceTree = "<group>"; };
+		0E77DD63236E0AB400E0F964 /* ExcerciseAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseAnimationView.swift; sourceTree = "<group>"; };
 		0E816A66235BB4B80061C6EE /* FlowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowerView.swift; sourceTree = "<group>"; };
 		0E816A68235BC9860061C6EE /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		0E816A6A235BCA190061C6EE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -76,7 +82,10 @@
 				0E816A68235BC9860061C6EE /* RingView.swift */,
 				0E816A6A235BCA190061C6EE /* HomeView.swift */,
 				0ED6AF2C2357AED500375524 /* StyleGuide.swift */,
+				0E752B362364FE7D002A08DE /* DaysView.swift */,
 				0ED6AF2E2357B5D700375524 /* Model.swift */,
+				0E77DD61236E028100E0F964 /* ExcerciseDetailView.swift */,
+				0E77DD63236E0AB400E0F964 /* ExcerciseAnimationView.swift */,
 				0E897F6823428FB30022A622 /* Assets.xcassets */,
 				0E897F6D23428FB30022A622 /* LaunchScreen.storyboard */,
 				0E897F7023428FB30022A622 /* Info.plist */,
@@ -166,12 +175,15 @@
 			files = (
 				0E816A6B235BCA190061C6EE /* HomeView.swift in Sources */,
 				0ED6AF2B235798C100375524 /* CardContentView.swift in Sources */,
+				0E77DD64236E0AB400E0F964 /* ExcerciseAnimationView.swift in Sources */,
 				0E897F6323428FAF0022A622 /* AppDelegate.swift in Sources */,
 				0E897F6523428FAF0022A622 /* SceneDelegate.swift in Sources */,
 				0ED6AF2F2357B5D700375524 /* Model.swift in Sources */,
+				0E752B372364FE7D002A08DE /* DaysView.swift in Sources */,
 				0E816A69235BC9860061C6EE /* RingView.swift in Sources */,
 				0ED6AF2D2357AED500375524 /* StyleGuide.swift in Sources */,
 				0E816A67235BB4B80061C6EE /* FlowerView.swift in Sources */,
+				0E77DD62236E028100E0F964 /* ExcerciseDetailView.swift in Sources */,
 				0E897F6723428FAF0022A622 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -95,7 +95,7 @@ struct CardContentView_Previews : PreviewProvider {
             ZStack {
                 Rectangle().background(Color.black)
                 GeometryReader { geometry in
-                    CardContentView(exercise: Exercise.allExercises.first!).background(Color.cardGray)
+                    CardContentView(exercise: Exercise.allExercises.first!).background(Color.darkGrayColor)
                         .frame(width: geometry.size.width*0.8, height: geometry.size.height*0.65, alignment: .center)
                 }
                  
@@ -104,12 +104,10 @@ struct CardContentView_Previews : PreviewProvider {
             
             ZStack {
                        Rectangle().background(Color.black)
-                       CardContentView(exercise: Exercise.allExercises.first!).background(Color.cardGray).frame(width: 320, height: 450)
+                       CardContentView(exercise: Exercise.allExercises.first!).background(Color.darkGrayColor).frame(width: 320, height: 450)
             }.previewDevice(PreviewDevice(rawValue: "iPhone X"))
             .previewDisplayName("iPhone X")
         }
-        
-       
     }
 }
 #endif

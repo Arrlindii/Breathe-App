@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Combine
 
 enum CardPosition {
     case top, bottomn
@@ -67,7 +66,7 @@ struct DraggableCardView: View {
         
         return
              RoundedRectangle(cornerRadius: 8.0)
-             .foregroundColor(Color.cardGray)
+             .foregroundColor(Color.darkGrayColor)
              .overlay(self.contentView)
              .overlay(RoundedRectangle(cornerRadius: 8.0)
              .strokeBorder(Color.textGray, style: StrokeStyle.init(lineWidth: 0.5)))
@@ -151,6 +150,9 @@ struct CardStackView: View {
     @ObservedObject var cardStack: CardStack
     var width: CGFloat
     var height: CGFloat
+    @Binding var fullSizeCard: Bool
+    var animationDuration: Double
+    var onCardSelected: (() -> Void)?
     
     var body: some View {
         GeometryReader { geometry in
@@ -175,7 +177,10 @@ struct CardStackView: View {
         }, dragEnded: { position in
             self.cardStack.allCards[i].isDragging = false
             withAnimation{self.cardStack.allCards[i].position = position}
-        })
+        }).onTapGesture {
+//            self.onCardSelected?()
+            withAnimation(Animation.easeIn(duration: self.animationDuration)) {self.fullSizeCard = true}
+        }
         
         if card.isDragging {
             zIndex = self.cardStack.allCards.count
@@ -184,35 +189,10 @@ struct CardStackView: View {
         }
            
         return cardView
-            .frame(width: self.width*0.85, height: self.height*0.6)
+            .frame(width: fullSizeCard ? width : width*0.85, height: fullSizeCard ? height : height*0.6)
             .offset(y: offset)
             .scaleEffect(scale)
             .zIndex(Double(zIndex))
     }
     
 }
-
-struct ContentView : View {
-    @ObservedObject var cardStack = CardStack(numberOfCards: Exercise.allExercises.count)
-    
-    var body: some View {
-            ZStack {
-                 HomeView()
-                 Rectangle().background(Color.black)
-                 .animation(.easeIn(duration: 0.4))
-                 .opacity(Double(cardStack.presentationPercentage))
-                 GeometryReader { geometry in
-                     CardStackView(cardStack: self.cardStack, width: geometry.size.width, height: geometry.size.height)
-                 }
-            }
-            .background(Color.gray)
-    }
-}
-
-#if DEBUG
-struct ContentView_Previews : PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-#endif

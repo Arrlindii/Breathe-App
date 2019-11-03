@@ -11,9 +11,10 @@ import SwiftUI
 struct RingView: View {
     var percentage: Double = 0.5
     let ringWidth: CGFloat
+    let backgroundColor: Color
     
     var body: some View {
-        BackgroundRing(ringWidth: ringWidth)
+        BackgroundRing(ringWidth: ringWidth, color: backgroundColor)
         .overlay(ForgroundRingView(percentage: percentage, ringWidth: ringWidth), alignment: .center)
     }
 
@@ -21,9 +22,9 @@ struct RingView: View {
 
 struct BackgroundRing: View {
     let ringWidth: CGFloat
+    var color: Color
     
     var body: some View {
-        let color = Color.init(red: 9/255, green: 25/255, blue: 23/255)
         return Circle().strokeBorder(color, lineWidth: ringWidth)
     }
 }
@@ -34,12 +35,10 @@ struct ForgroundRingView: View {
     let ringWidth: CGFloat
 
     var body: some View {
-        let color1 = Color.init(red: 56/255, green: 199/255, blue: 191/255)
-        let color2 = Color.init(red: 47/255, green: 245/255, blue: 220/255)
-        let spectrum = Gradient(colors: [ color1, color2])
+        let spectrum = Gradient(colors: [ Color.mintGreenColor, Color.darkMintColor])
         let conic = AngularGradient(gradient: spectrum, center: .center, angle: .radians(getEndAngle().radians))
         let ring = RingShape(startAngle: getStartAngle(), endAngle: getEndAngle(), ringWidth: ringWidth).fill(conic)
-        let ringHead = RingHead(endAngle: getEndAngle(), ringWidth: ringWidth).fill(color2)
+        let ringHead = RingHead(endAngle: getEndAngle(), ringWidth: ringWidth).fill(Color.darkMintColor)
         return ring.overlay(ringHead)
     }
     
