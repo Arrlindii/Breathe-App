@@ -23,7 +23,7 @@ struct DaysView: View {
 
 struct DayView: View {
     var dayAbv: String
-    var ringBgColor = Color.init(red: 34/255, green: 68/255, blue: 65/255)
+    var ringBgColor = Color.grayGreenColor
     
     var body: some View {
         VStack(alignment: .center, spacing: 8){

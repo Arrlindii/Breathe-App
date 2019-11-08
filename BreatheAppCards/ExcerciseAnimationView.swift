@@ -29,7 +29,7 @@ struct ExcerciseAnimationView: View {
                     Color.clear
                             .overlay(Color.clear.modifier(FlowerAnimatableView(sides: 6,
                                                                                size: self.presented ? geometry.size.height*0.3 : geometry.size.height*0.175,
-                                                                               scale: self.isAnimating ? 0.05: 1.0)))
+                                                                               scale: self.isAnimating ? 0.05: 1.0)) )
                     .opacity(self.presented ? 1.0 : 0.0)
                     .offset(x: 0, y: !self.presented ? -115 : 0) //TODO: Change this, only for testing
                     .onAppear(perform: {

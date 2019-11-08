@@ -13,37 +13,28 @@ struct HomeView: View {
     @State var percentage: Double = 0.65
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack(alignment: .center, spacing: 5){
-                Button(action: {
-                    withAnimation {self.percentage = 1.0}
-                 }) {
-                     Text("Increase Button")
-                 }
-                Button(action: {
-                    withAnimation {self.percentage = 0.65}
-                         }) {
-                             Text("Reset Button")
-                         }
-                DaysView().background(Color.darkGrayColor)
-                    .frame(height: 100)
-                
-                Spacer()
-                (Text("Today, ").font(.bodyText).bold() + Text(Date().dateString).font(.bodyText)).foregroundColor(Color.white)
-                Spacer()
-                HStack(alignment: .center, spacing: 25) {
-                    Spacer()
-                    RingView(percentage: self.percentage, ringWidth: 35.0, backgroundColor: Color.darkGrayColor)
-                        .animation(Animation.easeInOut(duration: 1.0))
-                        .overlay(DailyGoalView())
-                   Spacer()
-                }.frame(maxHeight: geometry.size.width)
-                Spacer()
-                Text("Swipe up to select exercise").font(.bodyText).foregroundColor(Color.darkGrayColor)
-                Spacer()
-            }
+             GeometryReader { geometry in
+                    VStack(alignment: .center, spacing: 5){
+                        DaysView().background(Color.darkGrayColor)
+                            .frame(height: 100)
+                        
+                        Spacer()
+                        (Text("Today, ").font(.bodyText).bold() + Text(Date().dateString).font(.bodyText)).foregroundColor(Color.white)
+                        Spacer()
+                        HStack(alignment: .center, spacing: 25) {
+                            Spacer()
+                            RingView(percentage: self.percentage, ringWidth: 35.0, backgroundColor: Color.darkGrayColor)
+                                .animation(Animation.easeInOut(duration: 1.0))
+                                .overlay(DailyGoalView())
+                           Spacer()
+                        }.frame(maxHeight: geometry.size.width)
+                        Spacer()
+                        Text("Swipe up to select exercise").font(.bodyText).foregroundColor(Color.white)
+                        Spacer()
+                    }
+                }
         }
-    }
+   
 }
 
 struct DailyGoalView: View {
@@ -60,6 +51,12 @@ struct ContentView : View {
     @State var isDetailsPresented: Bool = false
     //TODO: Save animation Duration as an enviorment object
     let animationDuration = 0.8
+    
+    init() {
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.red]
+        // For navigation bar background color
+        UINavigationBar.appearance().backgroundColor = .green
+    }
     
     var body: some View {
         ZStack {
@@ -78,7 +75,7 @@ struct ContentView : View {
                     )
                 {
                     
-//                    self.isDetailsPresented = true
+                    //                    self.isDetailsPresented = true
                     withAnimation(Animation.easeIn(duration: self.animationDuration*0.5)) {self.isDetailsPresented = true}
                     
                 }
@@ -90,10 +87,8 @@ struct ContentView : View {
                     self.isDetailsPresented = false
                 }
             }
-        }
-        .background(Color.black)
+        }.background(Color.black)
     }
-
     
 }
 

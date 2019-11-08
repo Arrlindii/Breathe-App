@@ -18,6 +18,8 @@ extension Color {
     static let darkGrayColor = Color.init(red: 20/255, green: 20/255, blue: 20/255)
     static let mintGreenColor = Color.init(red: 56/255, green: 199/255, blue: 191/255)
     static let darkMintColor = Color.init(red: 47/255, green: 245/255, blue: 220/255)
+    static let grayGreenColor = Color.init(red: 34/255, green: 68/255, blue: 65/255)
+    static let customGreenColor = Color.init(red: 33/255, green: 194/255, blue: 154/255)
 }
 
 extension Font {
