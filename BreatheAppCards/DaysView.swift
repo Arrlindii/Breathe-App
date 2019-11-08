@@ -13,10 +13,12 @@ struct DaysView: View {
     var days = ["M", "T", "W","T", "F", "S", "S"]
     
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
+            Spacer()
             ForEach(days, id: \.self) { day in
                 DayView(dayAbv: day)
             }
+            Spacer()
         }
     }
 }

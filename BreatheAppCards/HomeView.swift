@@ -11,30 +11,40 @@ import SwiftUI
 
 struct HomeView: View {
     @State var percentage: Double = 0.65
-
+    
     var body: some View {
-             GeometryReader { geometry in
-                    VStack(alignment: .center, spacing: 5){
-                        DaysView().background(Color.darkGrayColor)
-                            .frame(height: 100)
-                        
-                        Spacer()
-                        (Text("Today, ").font(.bodyText).bold() + Text(Date().dateString).font(.bodyText)).foregroundColor(Color.white)
-                        Spacer()
-                        HStack(alignment: .center, spacing: 25) {
-                            Spacer()
-                            RingView(percentage: self.percentage, ringWidth: 35.0, backgroundColor: Color.darkGrayColor)
-                                .animation(Animation.easeInOut(duration: 1.0))
-                                .overlay(DailyGoalView())
-                           Spacer()
-                        }.frame(maxHeight: geometry.size.width)
-                        Spacer()
-                        Text("Swipe up to select exercise").font(.bodyText).foregroundColor(Color.white)
-                        Spacer()
-                    }
+        GeometryReader { geometry in
+            VStack(alignment: .center) {
+                HStack{
+                    Text("November")
+                      .font(.largeTitle)
+                      .bold()
+                      .foregroundColor(Color.white)
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                      .offset(x: 25)
                 }
+                .background(Color.darkGrayColor)
+                
+                DaysView().background(Color.darkGrayColor)
+                    .frame(height: 100)
+                
+                Spacer().frame(height: 40)
+                (Text("Today, ").font(.bodyText).bold() + Text(Date().dateString).font(.bodyText)).foregroundColor(Color.white)
+                Spacer().frame(height: 35)
+                HStack(alignment: .center, spacing: 25) {
+                    Spacer()
+                    RingView(percentage: self.percentage, ringWidth: 35.0, backgroundColor: Color.darkGrayColor)
+                        .animation(Animation.easeInOut(duration: 1.0))
+                        .overlay(DailyGoalView())
+                    Spacer()
+                }.frame(maxHeight: geometry.size.width)
+                Spacer().frame(height: 10)
+                Text("Swipe up to select exercise").font(.bodyText).foregroundColor(Color.white)
+                Spacer()
+            }
         }
-   
+    }
+    
 }
 
 struct DailyGoalView: View {
@@ -52,16 +62,9 @@ struct ContentView : View {
     //TODO: Save animation Duration as an enviorment object
     let animationDuration = 0.8
     
-    init() {
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.red]
-        // For navigation bar background color
-        UINavigationBar.appearance().backgroundColor = .green
-    }
-    
     var body: some View {
         ZStack {
             HomeView()
-            
             //Card Stack view
             Rectangle().background(Color.black)
                 .animation(.easeIn(duration: 0.4))
@@ -87,7 +90,7 @@ struct ContentView : View {
                     self.isDetailsPresented = false
                 }
             }
-        }.background(Color.black)
+        }.background(Color.black).edgesIgnoringSafeArea([.bottom])
     }
     
 }
