@@ -155,13 +155,11 @@ struct CardStackView: View {
     var onCardSelected: (() -> Void)?
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                ForEach(0..<self.cardStack.allCards.count) { i in
-                    self.cardAt(i)
-                }
+        ZStack {
+            ForEach(0..<self.cardStack.allCards.count) { i in
+                self.cardAt(i)
             }
-        }.frame(width: width, height: height)
+        }
     }
     
     func cardAt(_ i: Int) -> some View {

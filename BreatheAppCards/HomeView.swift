@@ -59,8 +59,10 @@ struct ContentView : View {
     //TODO: Save cardStack in enviorment
     @ObservedObject var cardStack = CardStack(numberOfCards: Exercise.allExercises.count)
     @State var isDetailsPresented: Bool = false
+    @State var isExcerciseCompletedPresented: Bool = false
     //TODO: Save animation Duration as an enviorment object
     let animationDuration = 0.8
+    
     
     var body: some View {
         ZStack {
@@ -92,6 +94,11 @@ struct ContentView : View {
                     self.isDetailsPresented = false
                 }
             }
+            
+            if isExcerciseCompletedPresented {
+                ExcerciseCompletedView()
+            }
+            
         }.background(Color.black).edgesIgnoringSafeArea([.bottom])
     }
     
