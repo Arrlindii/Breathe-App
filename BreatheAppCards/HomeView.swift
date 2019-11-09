@@ -67,11 +67,10 @@ struct ContentView : View {
     var body: some View {
         ZStack {
             HomeView()
+            
             //Card Stack view
-      
             ExerciseBackgroundView()
                 .opacity(Double(cardStack.presentationPercentage))
-            
             
             GeometryReader { geometry in
                 CardStackView(cardStack: self.cardStack,
@@ -91,7 +90,7 @@ struct ContentView : View {
             
             if isDetailsPresented {
                 ExcerciseAnimationView(animationDuration: self.animationDuration).onTapGesture {
-                    self.isDetailsPresented = false
+                    self.isExcerciseCompletedPresented = true
                 }
             }
             

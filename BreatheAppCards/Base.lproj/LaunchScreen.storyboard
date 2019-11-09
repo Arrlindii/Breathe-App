@@ -15,16 +15,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Launch Screen" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="skf-o6-MKO">
-                                <rect key="frame" x="144.5" y="436" width="125" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breathe App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kF-Fa-qnq">
+                                <rect key="frame" x="74.5" y="425.5" width="265" height="55"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="46"/>
+                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
-                            <constraint firstItem="skf-o6-MKO" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Che-Wh-q8U"/>
-                            <constraint firstItem="skf-o6-MKO" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="bFB-Uh-ogE"/>
+                            <constraint firstItem="3kF-Fa-qnq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Hn5-fh-jx6"/>
+                            <constraint firstItem="3kF-Fa-qnq" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="SaL-Vw-0NK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

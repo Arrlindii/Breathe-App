@@ -9,20 +9,39 @@
 import SwiftUI
 
 struct ExcerciseCompletedView: View {
+    @State var shown: Bool = false
+    private let animationTime = 1.0
+    
     var body: some View {
         Color.black.overlay(
-            VStack {
-                Spacer(minLength: 250)
-                CenterView()
+            VStack(alignment: .leading) {
                 Spacer()
-                Button(action: {}, label: {
-                    Text("Complete")
-                        .bold()
-                        .foregroundColor(Color.white)
-                })
-                    .frame(maxWidth: .infinity, minHeight: 50)
-                    .background(Color.customGreenColor)
-                    .cornerRadius(8)
+                if shown {
+                    FlowerAnimatableView(sides: 6,size: 65,scale: 1.0)
+                    .frame(width: 65, height: 65)
+                    .transition(AnyTransition.scale(scale: 0.3).combined(with: .offset(x: 100, y: 200)))
+                    .animation(Animation.easeInOut(duration: animationTime))
+                    
+                    CenterView()
+                        .animation(Animation.easeInOut(duration: animationTime).delay(animationTime/2))
+                        .transition(AnyTransition.opacity.combined(with: .offset(x: 0, y: 80)))
+                    
+                }
+                Spacer()
+
+                if shown {
+                    Button(action: {}, label: {
+                        Text("Complete")
+                            .bold()
+                            .foregroundColor(Color.white)
+                    })
+                        .frame(maxWidth: .infinity, minHeight: 50)
+                        .background(Color.customGreenColor)
+                        .cornerRadius(8)
+                        .animation(Animation.easeInOut(duration: animationTime).delay(animationTime/1.5))
+                        .transition(AnyTransition.opacity.combined(with: .offset(x: 0, y: 80)))
+                }
+
                 
                 
                 Spacer(minLength: 150)
@@ -30,13 +49,15 @@ struct ExcerciseCompletedView: View {
             .background(Color.black)
             .padding(.horizontal, 40)
         ).edgesIgnoringSafeArea([.top, .bottom])
+            .onAppear(perform: {
+                self.shown = true
+            })
     }
 }
 
 fileprivate struct CenterView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Image("placeholder1")
             Text("Well done.")
                 .font(.headerText)
                 .foregroundColor(Color.white)

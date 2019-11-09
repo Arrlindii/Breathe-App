@@ -10,15 +10,16 @@ import SwiftUI
 
 struct CardContentView: View {
     @State private var sides: Double = 6
-    @State var fullScale = true
     let exercise: Exercise
     
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: 10) {
                 Spacer()
-                Color.clear.frame(width: geometry.size.height*0.3, height: geometry.size.height*0.3)
-                    .overlay(Color.clear.modifier(FlowerAnimatableView(sides: self.sides, size: geometry.size.height*0.3, scale: self.fullScale ? 1.0 : 0.05)))
+                
+                FlowerAnimatableView(sides: self.sides, size: geometry.size.height*0.3, scale: 1.0)
+                .frame(width: geometry.size.height*0.3, height: geometry.size.height*0.3)
+                
                 Text(self.exercise.title)
                     .font(.headerText)
                     .bold()
@@ -41,10 +42,6 @@ struct CardContentView: View {
                     }
                 }
                 Spacer()
-            }.onTapGesture {
-                withAnimation(Animation.easeIn(duration: 1.5).repeatForever(autoreverses: true)) {
-                    self.fullScale = false
-                }
             }
         }
     }

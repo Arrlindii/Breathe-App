@@ -20,7 +20,20 @@ struct GradientView: View {
     }
 }
 
-struct FlowerAnimatableView: AnimatableModifier {
+struct FlowerAnimatableView: View {
+    var sides: Double
+    var size: CGFloat
+    var scale: CGFloat
+    
+    var body: some View {
+        Color.clear.overlay(Color.clear.modifier(FlowerAnimatableViewModifier(sides: sides,
+                                                                               size: size,
+                                                                               scale: scale)))
+    }
+}
+
+
+struct FlowerAnimatableViewModifier: AnimatableModifier {
     var sides: Double
     var size: CGFloat
     var scale: CGFloat
