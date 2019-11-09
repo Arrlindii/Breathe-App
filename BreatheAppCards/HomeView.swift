@@ -16,7 +16,7 @@ struct HomeView: View {
         GeometryReader { geometry in
             VStack(alignment: .center) {
                 HStack{
-                    Text("November")
+                    Text(Date().monthString)
                       .font(.largeTitle)
                       .bold()
                       .foregroundColor(Color.white)
@@ -66,9 +66,11 @@ struct ContentView : View {
         ZStack {
             HomeView()
             //Card Stack view
-            Rectangle().background(Color.black)
-                .animation(.easeIn(duration: 0.4))
+      
+            ExerciseBackgroundView()
                 .opacity(Double(cardStack.presentationPercentage))
+            
+            
             GeometryReader { geometry in
                 CardStackView(cardStack: self.cardStack,
                               width: geometry.size.width,
@@ -95,10 +97,28 @@ struct ContentView : View {
     
 }
 
+struct ExerciseBackgroundView: View {
+    var body: some View {
+        ZStack {
+            Color.black.edgesIgnoringSafeArea([.top, .bottom])
+            VStack {
+                
+                (Text("Select ")
+                    .font(.bodyText).bold() +
+                    Text("breathe exercise")
+                        .font(.bodyText))
+                    .foregroundColor(Color.white)
+                    .offset(y: 25)
+                Spacer()
+            }
+        }
+    }
+}
+
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
-        ContentView().background(Color.black)
+        ExerciseBackgroundView()
     }
 }
 #endif
