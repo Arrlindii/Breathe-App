@@ -15,7 +15,7 @@ struct ExcerciseCompletedView: View {
     var body: some View {
         Color.black.overlay(
             VStack(alignment: .leading) {
-                Spacer()
+                Spacer(minLength: 250.0)
                 if shown {
                     FlowerAnimatableView(sides: 6,size: 65,scale: 1.0)
                     .frame(width: 65, height: 65)
@@ -41,9 +41,6 @@ struct ExcerciseCompletedView: View {
                         .animation(Animation.easeInOut(duration: animationTime).delay(animationTime/1.5))
                         .transition(AnyTransition.opacity.combined(with: .offset(x: 0, y: 80)))
                 }
-
-                
-                
                 Spacer(minLength: 150)
             }
             .background(Color.black)
@@ -71,9 +68,9 @@ fileprivate struct CenterView: View {
     }
 }
 
-struct ExcerciseCompletedView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExcerciseCompletedView()
-        //            .background(Color.black)
-    }
-}
+//struct ExcerciseCompletedView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        ExcerciseCompletedView(completed: $completed)
+//        //            .background(Color.black)
+//    }
+//}

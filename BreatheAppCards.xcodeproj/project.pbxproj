@@ -14,6 +14,7 @@
 		0E816A69235BC9860061C6EE /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E816A68235BC9860061C6EE /* RingView.swift */; };
 		0E816A6B235BCA190061C6EE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E816A6A235BCA190061C6EE /* HomeView.swift */; };
 		0E840D372377139600054F02 /* ExcerciseCompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E840D362377139600054F02 /* ExcerciseCompletedView.swift */; };
+		0E840D39237778C400054F02 /* CardStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E840D38237778C400054F02 /* CardStackView.swift */; };
 		0E897F6323428FAF0022A622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E897F6223428FAF0022A622 /* AppDelegate.swift */; };
 		0E897F6523428FAF0022A622 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E897F6423428FAF0022A622 /* SceneDelegate.swift */; };
 		0E897F6723428FAF0022A622 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E897F6623428FAF0022A622 /* ContentView.swift */; };
@@ -33,6 +34,7 @@
 		0E816A68235BC9860061C6EE /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		0E816A6A235BCA190061C6EE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0E840D362377139600054F02 /* ExcerciseCompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseCompletedView.swift; sourceTree = "<group>"; };
+		0E840D38237778C400054F02 /* CardStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStackView.swift; sourceTree = "<group>"; };
 		0E897F5F23428FAF0022A622 /* BreatheAppCards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreatheAppCards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E897F6223428FAF0022A622 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E897F6423428FAF0022A622 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				0E897F6223428FAF0022A622 /* AppDelegate.swift */,
 				0E897F6423428FAF0022A622 /* SceneDelegate.swift */,
 				0E897F6623428FAF0022A622 /* ContentView.swift */,
+				0E840D38237778C400054F02 /* CardStackView.swift */,
 				0ED6AF2A235798C100375524 /* CardContentView.swift */,
 				0E816A66235BB4B80061C6EE /* FlowerView.swift */,
 				0E816A68235BC9860061C6EE /* RingView.swift */,
@@ -177,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E816A6B235BCA190061C6EE /* HomeView.swift in Sources */,
+				0E840D39237778C400054F02 /* CardStackView.swift in Sources */,
 				0ED6AF2B235798C100375524 /* CardContentView.swift in Sources */,
 				0E77DD64236E0AB400E0F964 /* ExcerciseAnimationView.swift in Sources */,
 				0E897F6323428FAF0022A622 /* AppDelegate.swift in Sources */,

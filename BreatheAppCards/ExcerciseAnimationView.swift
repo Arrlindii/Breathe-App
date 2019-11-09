@@ -11,9 +11,8 @@ import SwiftUI
 
 //TODO: Refactor
 struct ExcerciseAnimationView: View {
-    @State var presented: Bool = false
     @State var isAnimating = false
-    @State var isOffseted = true
+    @State var shown = false
     
     var animationDuration: Double
     
@@ -21,23 +20,27 @@ struct ExcerciseAnimationView: View {
         GeometryReader { geometry in
             ZStack {
                 //Background View
-                Rectangle().background(Color.black)
-                    .opacity(self.presented ? 1.0 : 0.0)
-                
-                //Flower View
-                FlowerAnimatableView(sides: 6,
-                                     size: self.presented ? geometry.size.height*0.3 : geometry.size.height*0.175,
-                                     scale: self.isAnimating ? 0.05: 1.0)
-                    .opacity(self.presented ? 1.0 : 0.0)
-                    .offset(x: 0, y: !self.presented ? -115 : 0) //TODO: Change this, only for testing
-                    .onAppear(perform: {
-                        withAnimation(Animation.easeIn(duration: self.animationDuration)) {self.presented.toggle()}
-                        
-                        withAnimation(Animation.easeIn(duration: 1.5).repeatForever(autoreverses: true).delay(self.animationDuration)) {
-                            self.isAnimating = true
-                        }
-                    })
+                if self.shown {
+                    Rectangle().background(Color.black)
+                        .transition(.opacity)
+                    
+                    FlowerAnimatableView(sides: 6,
+                                         size: geometry.size.height*0.3,
+                                         scale: self.isAnimating ? 0.05: 1.0)
+                        .transition(AnyTransition.scale(scale: 0.65)
+                            .combined(with: .opacity)
+                            .combined(with: .offset(y: -120))
+                        )
+                }
             }
-        }
+        }.onAppear(perform: {
+            withAnimation(.easeInOut(duration: self.animationDuration)) {
+                self.shown = true
+            }
+            //TODO: Move this to animatable view, with a state var to state start animation
+            withAnimation(Animation.easeIn(duration: 1.5).repeatForever(autoreverses: true).delay(self.animationDuration)) {
+                self.isAnimating = true
+            }
+        })
     }
 }
