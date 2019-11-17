@@ -12,14 +12,22 @@ enum CardPosition {
     case top, bottomn
 }
 
+struct Card: Identifiable {
+    var id: Int
+    var isDragging: Bool = false
+    var percentPresented: CGFloat = 0.0
+    var position: CardPosition = .bottomn {
+        didSet {
+            self.percentPresented = (position == .top) ? 1.0 : 0.0
+        }
+    }
+}
+
 struct DraggableCardView: View {
-    @State var offset: CGPoint
-        //= CGPoint(x: 0, y: UIScreen.main.bounds.height*0.65)
+    @State var offset: CGPoint = CGPoint(x: 0, y: UIScreen.main.bounds.height*0.65)
     
-    var contentView: CardContentView //TODO: Use View here
-    var dragChanged: ((CGFloat) -> Void)?
-    var dragEnded: ((CardPosition) -> Void)?
-    let position: CardPosition
+    var contentView: CardContentView //TODO: Use View here || Or even better overlay it from outside
+    @Binding var card: Card
     
     private let minimumY: CGFloat = 0
     private var maximumY: CGFloat {
@@ -33,19 +41,10 @@ struct DraggableCardView: View {
             return self.offset.y/(maximumY - minimumY)
         }
     }
-    
-    init(contentView: CardContentView, dragChanged: ((CGFloat) -> Void)?, dragEnded: ((CardPosition) -> Void)?, position: CardPosition) {
-        self.position = position
-        self.contentView = contentView
-        self.dragChanged = dragChanged
-        self.dragEnded = dragEnded
-        _offset = (position == .top) ? State(initialValue: CGPoint.zero) : State(initialValue: CGPoint(x: 0, y: UIScreen.main.bounds.height*0.65))
-    }
 
     var body: some View {
         let dragGesture = DragGesture().onChanged({ value in
-            
-            self.dragChanged?(self.percentChanged)
+            self.card.percentPresented = 1 - self.percentChanged
             
             var offsetY = value.location.y - value.startLocation.y
             
@@ -56,21 +55,23 @@ struct DraggableCardView: View {
             let y = min(self.maximumY, max(self.minimumY, offsetY))
             let changedPoints = CGPoint(x: 0, y: y)
             self.offset = changedPoints
+            self.card.isDragging = true
+            
         }).onEnded { _ in
             if self.percentChanged > 0.5 {
                 //Push it to the bottomn
                 withAnimation(.easeIn(duration: 0.2)) {
                     self.offset = CGPoint(x: 0, y: self.maximumY)
+                    self.card.position = .bottomn
+                    self.card.isDragging = false
                 }
-                
-                self.dragEnded?(.bottomn)
             } else {
                 //Push it to the top again
                 withAnimation(.easeIn(duration: 0.2)) {
                     self.offset = CGPoint.zero
+                    self.card.position = .top
+                    self.card.isDragging = false
                 }
-                
-                self.dragEnded?(.top)
             }
         }
         
@@ -85,50 +86,57 @@ struct DraggableCardView: View {
     }
 }
 
-//Mark: Model
-struct Card: Identifiable {
-    var id: Int
-    var isDragging: Bool = false
-    var percentPresented: CGFloat = 0.0
-    var position: CardPosition = .bottomn {
-        didSet {
-            self.percentPresented = (position == .top) ? 1.0 : 0.0
-        }
-    }
-}
-
-class CardStack: ObservableObject {
-    @Published var allCards: [Card]
-    private var marginTop = 0.0
-
-    var presentationPercentage: CGFloat {
-        get {
-            if topCards.isEmpty {
-                return bottomnCards.last?.percentPresented ?? 0
-            } else if topCards.count == 1 {
-                return topCards.first?.percentPresented ?? 0
-            } else {
-                return 1.0
-            }
-        }
-    }
+struct CardStackView: View {
+    @Binding var fullSizeCard: Bool
+    @Binding var cards: [Card]
     
-    var bottomnCards: [Card] {
-        return allCards.filter {
+    private var bottomnCards: [Card] {
+        return cards.filter {
             $0.position == .bottomn
         }
     }
     
-    var topCards: [Card] {
-        return allCards.filter {
+    private var topCards: [Card] {
+        return cards.filter {
             $0.position == .top
         }
     }
+
+    var animationDuration: Double
     
-    init(numberOfCards: Int) {
-        self.allCards = (0..<numberOfCards).map {
-            return Card(id: $0)
+    var body: some View {
+        ZStack {
+            ForEach(0..<self.cards.count) { i in
+                self.cardAt(i)
+            }
         }
+    }
+
+    func cardAt(_ i: Int) -> some View {
+        let card = cards[i]
+        let scale = CGFloat(self.cardScale(card))
+        let offset = CGFloat(self.cardOffset(card))
+        var zIndex = 0
+        
+
+        let cardView = DraggableCardView(contentView: CardContentView(exercise: Exercise.allExercises[i]),
+                                         card: self.$cards[i])
+        .onTapGesture {
+            withAnimation(Animation.easeIn(duration: self.animationDuration)) {self.fullSizeCard = true}
+        }
+        
+        if card.isDragging {
+            zIndex = self.cards.count
+        } else {
+            zIndex = (card.position == .top) ? (self.cards.count - i - 1) : 0
+        }
+           
+        return cardView
+            .padding(.horizontal, fullSizeCard ? 0 : 30)
+            .padding(.vertical, fullSizeCard ? 0 : 160)
+            .offset(y: offset)
+            .scaleEffect(scale)
+            .zIndex(Double(zIndex))
     }
     
     func cardScale(_ card: Card) -> Double {
@@ -148,56 +156,12 @@ class CardStack: ObservableObject {
          let bottomIndex = self.bottomnCards.firstIndex(where: {$0.id == card.id})
          
          if let index = bottomIndex {
-             return marginTop + Double(index)
+             return Double(index)
          } else if let index = topIndex {
-             return marginTop + 20*Double(index)
+             return 20*Double(index)
          }
          return 0
     }
-}
-
-struct CardStackView: View {
-    @ObservedObject var cardStack: CardStack
-    @Binding var fullSizeCard: Bool
-    var animationDuration: Double
     
-    var body: some View {
-        ZStack {
-            ForEach(0..<self.cardStack.allCards.count) { i in
-                self.cardAt(i)
-            }
-        }
-    }
-    
-    func cardAt(_ i: Int) -> some View {
-        let card = self.cardStack.allCards[i]
-        let scale = CGFloat(self.cardStack.cardScale(card))
-        let offset = CGFloat(self.cardStack.cardOffset(card))
-        var zIndex = 0
-        
-        let cardView = DraggableCardView(contentView: CardContentView(exercise: Exercise.allExercises[i])
-            , dragChanged: { percent in
-                self.cardStack.allCards[i].percentPresented = 1 - percent
-                self.cardStack.allCards[i].isDragging = true
-        }, dragEnded: { position in
-            self.cardStack.allCards[i].isDragging = false
-            withAnimation{self.cardStack.allCards[i].position = position}
-        }, position: card.position).onTapGesture {
-            withAnimation(Animation.easeIn(duration: self.animationDuration)) {self.fullSizeCard = true}
-        }
-        
-        if card.isDragging {
-            zIndex = self.cardStack.allCards.count
-        } else {
-            zIndex = (card.position == .top) ? (self.cardStack.allCards.count - i - 1) : 0
-        }
-           
-        return cardView
-            .padding(.horizontal, fullSizeCard ? 0 : 30)
-            .padding(.vertical, fullSizeCard ? 0 : 160)
-            .offset(y: offset)
-            .scaleEffect(scale)
-            .zIndex(Double(zIndex))
-    }
     
 }

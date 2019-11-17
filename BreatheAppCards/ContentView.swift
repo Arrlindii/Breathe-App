@@ -8,26 +8,36 @@
 import SwiftUI
 
 struct ContentView : View {
-    @ObservedObject var cardStack = CardStack(numberOfCards: Exercise.allExercises.count) //TODO: Save cardStack in enviorment
+    private let exercises = Exercise.allExercises
+    
     @State var isDetailsPresented: Bool = false
     @State var isExcerciseCompletedPresented: Bool = false
     @State var excerciseCompleted: Bool = false
+    @State var cards = [Card(id: 0), Card(id: 1), Card(id: 2)]
     
     let animationDuration = 0.8
     
+    
+    func backgroundOpacity() -> Double {
+        return Double(cards.reduce(0) {$0 + $1.percentPresented})
+    }
     
     var body: some View {
         ZStack {
             HomeView()
             
             ExerciseBackgroundView()
-                .opacity(Double(cardStack.presentationPercentage))
+                .opacity(backgroundOpacity())
             
-            CardStackView(cardStack: self.cardStack,
-                          fullSizeCard: self.$isDetailsPresented,
-                          animationDuration: self.animationDuration
-            )
             
+            
+            //(0..<exercises.count).map {Card(id: $0)}
+            
+            CardStackView(fullSizeCard: $isDetailsPresented,
+                          cards: self.$cards,
+                          animationDuration: animationDuration)
+            
+
             if isDetailsPresented {
                 ExcerciseAnimationView(animationDuration: self.animationDuration*2).onTapGesture {
                     self.isExcerciseCompletedPresented = true
