@@ -13,11 +13,13 @@ enum CardPosition {
 }
 
 struct DraggableCardView: View {
-    @State var offset: CGPoint = CGPoint(x: 0, y: UIScreen.main.bounds.height*0.65)
+    @State var offset: CGPoint
+        //= CGPoint(x: 0, y: UIScreen.main.bounds.height*0.65)
     
-    var contentView: CardContentView
+    var contentView: CardContentView //TODO: Use View here
     var dragChanged: ((CGFloat) -> Void)?
     var dragEnded: ((CardPosition) -> Void)?
+    let position: CardPosition
     
     private let minimumY: CGFloat = 0
     private var maximumY: CGFloat {
@@ -30,6 +32,14 @@ struct DraggableCardView: View {
         get {
             return self.offset.y/(maximumY - minimumY)
         }
+    }
+    
+    init(contentView: CardContentView, dragChanged: ((CGFloat) -> Void)?, dragEnded: ((CardPosition) -> Void)?, position: CardPosition) {
+        self.position = position
+        self.contentView = contentView
+        self.dragChanged = dragChanged
+        self.dragEnded = dragEnded
+        _offset = (position == .top) ? State(initialValue: CGPoint.zero) : State(initialValue: CGPoint(x: 0, y: UIScreen.main.bounds.height*0.65))
     }
 
     var body: some View {
@@ -172,7 +182,7 @@ struct CardStackView: View {
         }, dragEnded: { position in
             self.cardStack.allCards[i].isDragging = false
             withAnimation{self.cardStack.allCards[i].position = position}
-        }).onTapGesture {
+        }, position: card.position).onTapGesture {
             withAnimation(Animation.easeIn(duration: self.animationDuration)) {self.fullSizeCard = true}
         }
         

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ExcerciseCompletedView: View {
     @State var shown: Bool = false
-    private let animationTime = 1.0
+    private let animationTime = 0.8
     
     var body: some View {
         Color.black.overlay(
