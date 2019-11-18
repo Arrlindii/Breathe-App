@@ -14,6 +14,7 @@ struct ContentView : View {
     @State var isExcerciseCompletedPresented: Bool = false
     @State var excerciseCompleted: Bool = false
     @State var cards = [Card(id: 0), Card(id: 1), Card(id: 2)]
+    @State var todaysExercisePercentage = 0.65
     
     let animationDuration = 0.8
     
@@ -24,7 +25,7 @@ struct ContentView : View {
     
     var body: some View {
         ZStack {
-            HomeView()
+            HomeView(percentage: $todaysExercisePercentage)
             
             ExerciseBackgroundView()
                 .opacity(backgroundOpacity())
@@ -33,9 +34,16 @@ struct ContentView : View {
             
             //(0..<exercises.count).map {Card(id: $0)}
             
-            CardStackView(fullSizeCard: $isDetailsPresented,
-                          cards: self.$cards,
-                          animationDuration: animationDuration)
+            if !isExcerciseCompletedPresented {
+                CardStackView(fullSizeCard: $isDetailsPresented,
+                              cards: self.$cards,
+                              animationDuration: animationDuration)
+                    .onAppear(perform: {
+                        for i in (0..<self.cards.count) {
+                            self.cards[i].position = .bottomn
+                        }
+                    })
+            }
             
 
             if isDetailsPresented {

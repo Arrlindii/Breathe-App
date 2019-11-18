@@ -10,7 +10,8 @@ import Foundation
 import SwiftUI
 
 struct HomeView: View {
-    @State var percentage: Double = 0.65
+    @Binding var percentage: Double
+        //= 0.65
     
     var body: some View {
         GeometryReader { geometry in

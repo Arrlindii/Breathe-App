@@ -24,27 +24,16 @@ struct Card: Identifiable {
 }
 
 struct DraggableCardView: View {
-    @State var offset: CGPoint = CGPoint(x: 0, y: UIScreen.main.bounds.height*0.65)
-    
     var contentView: CardContentView //TODO: Use View here || Or even better overlay it from outside
     @Binding var card: Card
     
     private let minimumY: CGFloat = 0
-    private var maximumY: CGFloat {
-        get {
-            UIScreen.main.bounds.height*0.65
-        }
-    }
-
-    var percentChanged:CGFloat {
-        get {
-            return self.offset.y/(maximumY - minimumY)
-        }
-    }
-
+    private let maximumY: CGFloat = UIScreen.main.bounds.height*0.65
+    
     var body: some View {
         let dragGesture = DragGesture().onChanged({ value in
-            self.card.percentPresented = 1 - self.percentChanged
+            self.card.isDragging = true
+            
             
             var offsetY = value.location.y - value.startLocation.y
             
@@ -53,36 +42,23 @@ struct DraggableCardView: View {
             }
             
             let y = min(self.maximumY, max(self.minimumY, offsetY))
-            let changedPoints = CGPoint(x: 0, y: y)
-            self.offset = changedPoints
-            self.card.isDragging = true
-            
+            self.card.percentPresented = 1 - (y/(self.maximumY - self.minimumY))
         }).onEnded { _ in
-            if self.percentChanged > 0.5 {
-                //Push it to the bottomn
-                withAnimation(.easeIn(duration: 0.2)) {
-                    self.offset = CGPoint(x: 0, y: self.maximumY)
-                    self.card.position = .bottomn
-                    self.card.isDragging = false
-                }
-            } else {
-                //Push it to the top again
-                withAnimation(.easeIn(duration: 0.2)) {
-                    self.offset = CGPoint.zero
-                    self.card.position = .top
-                    self.card.isDragging = false
-                }
+            self.card.isDragging = false
+            
+            withAnimation(.easeIn(duration: 0.2)) {
+                self.card.position = (self.card.percentPresented < 0.5) ? .bottomn :  .top
             }
         }
         
         return
-             RoundedRectangle(cornerRadius: 8.0)
-             .foregroundColor(Color.darkGrayColor)
-             .overlay(self.contentView)
-             .overlay(RoundedRectangle(cornerRadius: 8.0)
-             .strokeBorder(Color.textGray, style: StrokeStyle.init(lineWidth: 0.5)))
-             .offset(x: 0, y: self.offset.y)
-             .gesture(dragGesture)
+            RoundedRectangle(cornerRadius: 8.0)
+                .foregroundColor(Color.darkGrayColor)
+                .overlay(self.contentView)
+                .overlay(RoundedRectangle(cornerRadius: 8.0)
+                    .strokeBorder(Color.textGray, style: StrokeStyle.init(lineWidth: 0.5)))
+                .offset(x: 0, y: (1 - self.card.percentPresented)*(maximumY - minimumY))
+                .gesture(dragGesture)
     }
 }
 
@@ -118,7 +94,7 @@ struct CardStackView: View {
         let offset = CGFloat(self.cardOffset(card))
         var zIndex = 0
         
-
+        //TODO: Pass contentView
         let cardView = DraggableCardView(contentView: CardContentView(exercise: Exercise.allExercises[i]),
                                          card: self.$cards[i])
         .onTapGesture {
