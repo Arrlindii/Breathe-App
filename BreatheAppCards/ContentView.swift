@@ -10,11 +10,13 @@ import SwiftUI
 struct ContentView : View {
     private let exercises = Exercise.allExercises
     
+    @State var isCardStackPresented: Bool = true
     @State var isDetailsPresented: Bool = false
     @State var isExcerciseCompletedPresented: Bool = false
     @State var excerciseCompleted: Bool = false
     @State var cards = [Card(id: 0), Card(id: 1), Card(id: 2)]
     @State var todaysExercisePercentage = 0.65
+    
     
     let animationDuration = 0.8
     
@@ -27,36 +29,48 @@ struct ContentView : View {
         ZStack {
             HomeView(percentage: $todaysExercisePercentage)
             
+            
+            
             ExerciseBackgroundView()
                 .opacity(backgroundOpacity())
             
-            
-            
             //(0..<exercises.count).map {Card(id: $0)}
             
-            if !isExcerciseCompletedPresented {
-                CardStackView(fullSizeCard: $isDetailsPresented,
-                              cards: self.$cards,
+            if isCardStackPresented {
+                //TODO: Refactor this part to its own view
+                
+                CardStackView(cards: self.$cards,
+                              onCardSelected: {
+                                self.isDetailsPresented = true
+                                withAnimation(.easeIn(duration: self.animationDuration*2)) {
+                                    self.isCardStackPresented = false
+                                }
+                },
                               animationDuration: animationDuration)
                     .onAppear(perform: {
                         for i in (0..<self.cards.count) {
                             self.cards[i].position = .bottomn
                         }
                     })
+                    .transition(.asymmetric(insertion: AnyTransition.identity, removal: AnyTransition.scale(scale: 1.5)))
+                    .zIndex(1)
             }
             
-
+            
             if isDetailsPresented {
                 ExcerciseAnimationView(animationDuration: self.animationDuration*2).onTapGesture {
                     self.isExcerciseCompletedPresented = true
                 }
+                .zIndex(2)
             }
             
             if isExcerciseCompletedPresented {
                 ExcerciseCompletedView().onTapGesture {
                     self.isDetailsPresented = false
+                    self.isCardStackPresented = true
                     self.isExcerciseCompletedPresented = false
                 }
+                .zIndex(3)
             }
             
         }.background(Color.black).edgesIgnoringSafeArea([.bottom])

@@ -63,8 +63,8 @@ struct DraggableCardView: View {
 }
 
 struct CardStackView: View {
-    @Binding var fullSizeCard: Bool
     @Binding var cards: [Card]
+    var onCardSelected: (() -> Void)
     
     private var bottomnCards: [Card] {
         return cards.filter {
@@ -98,7 +98,7 @@ struct CardStackView: View {
         let cardView = DraggableCardView(contentView: CardContentView(exercise: Exercise.allExercises[i]),
                                          card: self.$cards[i])
         .onTapGesture {
-            withAnimation(Animation.easeIn(duration: self.animationDuration)) {self.fullSizeCard = true}
+            self.onCardSelected() //TODO: Add Card parameter to that function
         }
         
         if card.isDragging {
@@ -108,14 +108,11 @@ struct CardStackView: View {
         }
            
         return cardView
-            .padding(.horizontal, fullSizeCard ? 0 : 30)
-            .padding(.vertical, fullSizeCard ? 0 : 160)
+            .padding(.horizontal, 30)
+            .padding(.vertical, 160)
             .offset(y: offset)
             .scaleEffect(scale)
-            .zIndex(Double(zIndex))
-        .transition(AnyTransition.scale(scale: 0.65)
-            .combined(with: .opacity)
-            .combined(with: .offset(y: -120))
+            .zIndex(Double(zIndex)
         )
     }
     
