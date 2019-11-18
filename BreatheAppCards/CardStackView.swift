@@ -56,7 +56,7 @@ struct DraggableCardView: View {
                 .foregroundColor(Color.darkGrayColor)
                 .overlay(self.contentView)
                 .overlay(RoundedRectangle(cornerRadius: 8.0)
-                    .strokeBorder(Color.textGray, style: StrokeStyle.init(lineWidth: 0.5)))
+                .strokeBorder(Color.textGray, style: StrokeStyle.init(lineWidth: 0.5)))
                 .offset(x: 0, y: (1 - self.card.percentPresented)*(maximumY - minimumY))
                 .gesture(dragGesture)
     }
@@ -113,6 +113,10 @@ struct CardStackView: View {
             .offset(y: offset)
             .scaleEffect(scale)
             .zIndex(Double(zIndex))
+        .transition(AnyTransition.scale(scale: 0.65)
+            .combined(with: .opacity)
+            .combined(with: .offset(y: -120))
+        )
     }
     
     func cardScale(_ card: Card) -> Double {

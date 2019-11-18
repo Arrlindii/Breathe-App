@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0E752B372364FE7D002A08DE /* DaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E752B362364FE7D002A08DE /* DaysView.swift */; };
-		0E77DD62236E028100E0F964 /* ExcerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E77DD61236E028100E0F964 /* ExcerciseDetailView.swift */; };
 		0E77DD64236E0AB400E0F964 /* ExcerciseAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E77DD63236E0AB400E0F964 /* ExcerciseAnimationView.swift */; };
 		0E816A67235BB4B80061C6EE /* FlowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E816A66235BB4B80061C6EE /* FlowerView.swift */; };
 		0E816A69235BC9860061C6EE /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E816A68235BC9860061C6EE /* RingView.swift */; };
@@ -28,7 +27,6 @@
 
 /* Begin PBXFileReference section */
 		0E752B362364FE7D002A08DE /* DaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysView.swift; sourceTree = "<group>"; };
-		0E77DD61236E028100E0F964 /* ExcerciseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseDetailView.swift; sourceTree = "<group>"; };
 		0E77DD63236E0AB400E0F964 /* ExcerciseAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerciseAnimationView.swift; sourceTree = "<group>"; };
 		0E816A66235BB4B80061C6EE /* FlowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowerView.swift; sourceTree = "<group>"; };
 		0E816A68235BC9860061C6EE /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
@@ -89,7 +87,6 @@
 				0ED6AF2C2357AED500375524 /* StyleGuide.swift */,
 				0E752B362364FE7D002A08DE /* DaysView.swift */,
 				0ED6AF2E2357B5D700375524 /* Model.swift */,
-				0E77DD61236E028100E0F964 /* ExcerciseDetailView.swift */,
 				0E77DD63236E0AB400E0F964 /* ExcerciseAnimationView.swift */,
 				0E840D362377139600054F02 /* ExcerciseCompletedView.swift */,
 				0E897F6823428FB30022A622 /* Assets.xcassets */,
@@ -191,7 +188,6 @@
 				0E816A69235BC9860061C6EE /* RingView.swift in Sources */,
 				0ED6AF2D2357AED500375524 /* StyleGuide.swift in Sources */,
 				0E816A67235BB4B80061C6EE /* FlowerView.swift in Sources */,
-				0E77DD62236E028100E0F964 /* ExcerciseDetailView.swift in Sources */,
 				0E897F6723428FAF0022A622 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

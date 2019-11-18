@@ -9,9 +9,8 @@
 import Foundation
 import SwiftUI
 
-//TODO: Refactor
 struct ExcerciseAnimationView: View {
-    @State var isAnimating = false
+    @State var largeFlower = true
     @State var shown = false
     
     var animationDuration: Double
@@ -19,14 +18,13 @@ struct ExcerciseAnimationView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                //Background View
                 if self.shown {
                     Rectangle().background(Color.black)
                         .transition(.opacity)
                     
                     FlowerAnimatableView(sides: 6,
                                          size: geometry.size.height*0.3,
-                                         scale: self.isAnimating ? 0.05: 1.0)
+                                         scale: self.largeFlower ? 1.0 : 0.05)
                         .transition(AnyTransition.scale(scale: 0.65)
                             .combined(with: .opacity)
                             .combined(with: .offset(y: -120))
@@ -37,9 +35,8 @@ struct ExcerciseAnimationView: View {
             withAnimation(.easeInOut(duration: self.animationDuration)) {
                 self.shown = true
             }
-            //TODO: Move this to animatable view, with a state var to state start animation
-            withAnimation(Animation.easeIn(duration: 1.5).repeatForever(autoreverses: true).delay(self.animationDuration)) {
-                self.isAnimating = true
+            withAnimation(Animation.easeIn(duration: 1.5).repeatForever().delay(self.animationDuration)) {
+                self.largeFlower.toggle()
             }
         })
     }
