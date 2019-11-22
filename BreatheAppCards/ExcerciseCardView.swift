@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct CardContentView: View {
+struct ExcerciseCardView: View {
     @State private var sides: Double = 6
     let exercise: Exercise
     
@@ -92,7 +92,7 @@ struct CardContentView_Previews : PreviewProvider {
             ZStack {
                 Rectangle().background(Color.black)
                 GeometryReader { geometry in
-                    CardContentView(exercise: Exercise.allExercises.first!).background(Color.darkGrayColor)
+                    ExcerciseCardView(exercise: Exercise.allExercises.first!).background(Color.darkGrayColor)
                         .frame(width: geometry.size.width*0.8, height: geometry.size.height*0.65, alignment: .center)
                 }
                  
@@ -101,7 +101,7 @@ struct CardContentView_Previews : PreviewProvider {
             
             ZStack {
                        Rectangle().background(Color.black)
-                       CardContentView(exercise: Exercise.allExercises.first!).background(Color.darkGrayColor).frame(width: 320, height: 450)
+                       ExcerciseCardView(exercise: Exercise.allExercises.first!).background(Color.darkGrayColor).frame(width: 320, height: 450)
             }.previewDevice(PreviewDevice(rawValue: "iPhone X"))
             .previewDisplayName("iPhone X")
         }

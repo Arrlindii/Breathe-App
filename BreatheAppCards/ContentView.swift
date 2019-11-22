@@ -21,6 +21,7 @@ struct ContentView : View {
     let animationDuration = 0.8
     
     
+    
     func backgroundOpacity() -> Double {
         return Double(cards.reduce(0) {$0 + $1.percentPresented})
     }
@@ -40,7 +41,7 @@ struct ContentView : View {
                                 withAnimation(.easeIn(duration: self.animationDuration*2)) {
                                     self.isCardStackPresented = false
                                 }
-                },
+                }, cardContentViews: self.exercises.map {ExcerciseCardView(exercise: $0)},
                               animationDuration: animationDuration)
                     .onAppear(perform: {
                         for i in (0..<self.cards.count) {

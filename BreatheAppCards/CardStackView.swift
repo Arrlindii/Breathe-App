@@ -62,9 +62,10 @@ struct DraggableCardView<T: View>: View {
     }
 }
 
-struct CardStackView: View {
+struct CardStackView<T: View>: View {
     @Binding var cards: [Card]
     var onCardSelected: ((Card) -> Void)
+    var cardContentViews: [T]
     
     private var bottomnCards: [Card] {
         return cards.filter {
@@ -94,7 +95,7 @@ struct CardStackView: View {
         let offset = CGFloat(self.cardOffset(card))
         var zIndex = 0
         
-        let cardView = DraggableCardView(contentView: CardContentView(exercise: Exercise.allExercises[i]),
+        let cardView = DraggableCardView(contentView: cardContentViews[i],
                                          card: self.$cards[i])
         .onTapGesture {
             self.onCardSelected(card)
