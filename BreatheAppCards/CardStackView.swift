@@ -91,8 +91,8 @@ struct CardStackView<T: View>: View {
 
     func cardAt(_ i: Int) -> some View {
         let card = cards[i]
-        let scale = CGFloat(self.cardScale(card))
-        let offset = CGFloat(self.cardOffset(card))
+        let scale = self.cardScale(card)
+        let offset = self.cardOffset(card)
         var zIndex = 0
         
         let cardView = DraggableCardView(contentView: cardContentViews[i],
@@ -116,26 +116,26 @@ struct CardStackView<T: View>: View {
         )
     }
     
-    func cardScale(_ card: Card) -> Double {
+    func cardScale(_ card: Card) -> CGFloat {
         let topIndex = self.topCards.firstIndex(where: {$0.id == card.id})
         let bottomIndex = self.bottomnCards.firstIndex(where: {$0.id == card.id})
         
         if let index = bottomIndex {
-            return 1 - Double(bottomnCards.count - index)*0.03
+            return 1 - CGFloat(bottomnCards.count - index)*0.03
         } else if let index = topIndex {
-            return 1 - Double(index)*0.05
+            return 1 - CGFloat(index)*0.05
         }
         return 1
     }
     
-    func cardOffset(_ card: Card) -> Double {
+    func cardOffset(_ card: Card) -> CGFloat {
         let topIndex = self.topCards.firstIndex(where: {$0.id == card.id})
          let bottomIndex = self.bottomnCards.firstIndex(where: {$0.id == card.id})
          
          if let index = bottomIndex {
-             return Double(index)
+             return CGFloat(index)
          } else if let index = topIndex {
-             return 20*Double(index)
+             return 20*CGFloat(index)
          }
          return 0
     }
