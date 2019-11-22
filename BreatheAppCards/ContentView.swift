@@ -30,18 +30,12 @@ struct ContentView : View {
             HomeView(percentage: $todaysExercisePercentage,
                      dailyGoalAchieved: $dailyGoalAchieved)
             
-            
-            
             ExerciseBackgroundView()
                 .opacity(backgroundOpacity())
-            
-            //(0..<exercises.count).map {Card(id: $0)}
-            
+
             if isCardStackPresented {
-                //TODO: Refactor this part to its own view
-                
                 CardStackView(cards: self.$cards,
-                              onCardSelected: {
+                              onCardSelected: { selectedCard in
                                 self.isDetailsPresented = true
                                 withAnimation(.easeIn(duration: self.animationDuration*2)) {
                                     self.isCardStackPresented = false

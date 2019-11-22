@@ -23,8 +23,8 @@ struct Card: Identifiable {
     }
 }
 
-struct DraggableCardView: View {
-    var contentView: CardContentView //TODO: Use View here || Or even better overlay it from outside
+struct DraggableCardView<T: View>: View {
+    var contentView: T
     @Binding var card: Card
     
     private let minimumY: CGFloat = 0
@@ -64,7 +64,7 @@ struct DraggableCardView: View {
 
 struct CardStackView: View {
     @Binding var cards: [Card]
-    var onCardSelected: (() -> Void)
+    var onCardSelected: ((Card) -> Void)
     
     private var bottomnCards: [Card] {
         return cards.filter {
@@ -94,11 +94,10 @@ struct CardStackView: View {
         let offset = CGFloat(self.cardOffset(card))
         var zIndex = 0
         
-        //TODO: Pass contentView
         let cardView = DraggableCardView(contentView: CardContentView(exercise: Exercise.allExercises[i]),
                                          card: self.$cards[i])
         .onTapGesture {
-            self.onCardSelected() //TODO: Add Card parameter to that function
+            self.onCardSelected(card)
         }
         
         if card.isDragging {
