@@ -11,7 +11,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Binding var percentage: Double
-        //= 0.65
+    @Binding var dailyGoalAchieved: Bool
     
     var body: some View {
         GeometryReader { geometry in
@@ -36,7 +36,7 @@ struct HomeView: View {
                     Spacer()
                     RingView(percentage: self.percentage, ringWidth: 35.0, backgroundColor: Color.darkGrayColor)
                         .animation(Animation.easeInOut(duration: 1.0))
-                        .overlay(DailyGoalView())
+                        .overlay(DailyGoalView(dailyGoalAchieved: self.$dailyGoalAchieved))
                     Spacer()
                 }.frame(maxHeight: geometry.size.width)
                 Spacer().frame(height: 10)

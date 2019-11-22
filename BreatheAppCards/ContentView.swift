@@ -16,7 +16,7 @@ struct ContentView : View {
     @State var excerciseCompleted: Bool = false
     @State var cards = [Card(id: 0), Card(id: 1), Card(id: 2)]
     @State var todaysExercisePercentage = 0.65
-    
+    @State var dailyGoalAchieved = false
     
     let animationDuration = 0.8
     
@@ -27,7 +27,8 @@ struct ContentView : View {
     
     var body: some View {
         ZStack {
-            HomeView(percentage: $todaysExercisePercentage)
+            HomeView(percentage: $todaysExercisePercentage,
+                     dailyGoalAchieved: $dailyGoalAchieved)
             
             
             
@@ -69,6 +70,8 @@ struct ContentView : View {
                     self.isDetailsPresented = false
                     self.isCardStackPresented = true
                     self.isExcerciseCompletedPresented = false
+                    self.todaysExercisePercentage = 1.0
+                    self.dailyGoalAchieved = true
                 }
                 .zIndex(3)
             }
@@ -79,6 +82,8 @@ struct ContentView : View {
 }
 
 struct DailyGoalView: View {
+    @Binding var dailyGoalAchieved: Bool
+    
     var body: some View {
         (Text("10min ").bold() + Text("daily goal"))
             .font(.bodyText)
