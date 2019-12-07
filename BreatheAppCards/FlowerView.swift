@@ -95,9 +95,9 @@ struct FlowerAnimatableViewModifier: AnimatableModifier {
         
         var points: [CGPoint] = []
         
-        let extra: Int = Double(petalCount) != Double(Int(petalCount)) ? 1 : 0
+        let d = petalCount - Double(Int(petalCount)) > 0 ? 1 : 0
         
-        for i in 0..<Int(petalCount) + extra {
+        for i in 0..<Int(petalCount) + d {
             let angle = (Double(i) + Double(self.scale)) * (360/Double(petalCount))
             let angleInRad = angle*Double.pi/180
             
@@ -112,7 +112,7 @@ struct FlowerAnimatableViewModifier: AnimatableModifier {
 struct FlowerContentView_Previews : PreviewProvider {
     static var previews: some View {
         Color.black.overlay(
-        FlowerAnimatableView(sides: 6, size: 400, scale: 1.0)
+            FlowerAnimatableView(sides: 6, size: 400, scale: 0.1)
             .frame(width: 400, height: 400)).background(Color.red)
     }
 }

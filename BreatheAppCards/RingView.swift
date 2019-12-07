@@ -51,7 +51,7 @@ struct ForgroundRingView: View {
     }
 }
 
-struct RingHead: Shape {
+private struct RingHead: Shape {
     var endAngle: Angle
     let ringWidth: CGFloat
     
@@ -76,7 +76,7 @@ struct RingHead: Shape {
     }
 }
 
-struct RingShape: Shape {
+private struct RingShape: Shape {
     var startAngle: Angle
     var endAngle: Angle
     let ringWidth: CGFloat
@@ -97,3 +97,16 @@ struct RingShape: Shape {
          return path.strokedPath(.init(lineWidth: ringWidth, lineCap: CGLineCap.round))
     }
 }
+
+#if DEBUG
+struct RingView_Previews : PreviewProvider {
+    static var previews: some View {
+        Color.black.overlay(
+            HStack {
+                ForgroundRingView(percentage: 1, ringWidth: 35.0)
+                    .frame(maxWidth: 300, maxHeight: 300)
+            }
+        )
+    }
+}
+#endif

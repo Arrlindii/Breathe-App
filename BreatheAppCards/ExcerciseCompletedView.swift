@@ -18,29 +18,20 @@ struct ExcerciseCompletedView: View {
                 Spacer(minLength: 250.0)
                 if shown {
                     FlowerAnimatableView(sides: 6,size: 65,scale: 1.0)
-                    .frame(width: 65, height: 65)
-                    .transition(AnyTransition.scale(scale: 0.3).combined(with: .offset(x: 100, y: 200)))
-                    .animation(Animation.easeInOut(duration: animationTime))
+                        .frame(width: 65, height: 65)
+                        .transition(AnyTransition.scale(scale: 0.3)
+                            .combined(with: .offset(x: 100, y: 200)))
+                        .animation(Animation.easeInOut(duration: animationTime))
                     
-                    CenterView()
+                    LabelView()
                         .animation(Animation.easeInOut(duration: animationTime).delay(animationTime/2))
                         .transition(AnyTransition.opacity.combined(with: .offset(x: 0, y: 80)))
-                    
-                }
-                Spacer()
-
-                if shown {
-                    Button(action: {}, label: {
-                        Text("Complete")
-                            .bold()
-                            .foregroundColor(Color.white)
-                    })
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(Color.customGreenColor)
-                        .cornerRadius(8)
+                    Spacer()
+                    ButtonView()
                         .animation(Animation.easeInOut(duration: animationTime).delay(animationTime/1.5))
                         .transition(AnyTransition.opacity.combined(with: .offset(x: 0, y: 80)))
                 }
+                
                 Spacer(minLength: 150)
             }
             .background(Color.black)
@@ -52,14 +43,27 @@ struct ExcerciseCompletedView: View {
     }
 }
 
-fileprivate struct CenterView: View {
+fileprivate struct ButtonView: View {
+    var body: some View {
+        Button(action: {}, label: {
+            Text("Complete")
+                .bold()
+                .foregroundColor(Color.white)
+                .frame(maxWidth: .infinity, minHeight: 50)
+                .background(Color.customGreenColor)
+                .cornerRadius(8)
+        })
+    }
+}
+
+fileprivate struct LabelView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Well done.")
                 .font(.headerText)
                 .foregroundColor(Color.white)
                 .multilineTextAlignment(.leading)
-            (Text("Your 2 minute breathe excercise is done. So far you today you breathe")
+            (Text("Your 2 minute breathe excercise is done. So far today you breathe")
                 + Text("\n10 minutes ").bold().foregroundColor(Color.white) + Text("mindfully."))
                 .multilineTextAlignment(.leading)
                 .font(.bodyText)
@@ -68,9 +72,3 @@ fileprivate struct CenterView: View {
     }
 }
 
-//struct ExcerciseCompletedView_Previews: PreviewProvider {
-//    static var previews: some View {
-////        ExcerciseCompletedView(completed: $completed)
-//        //            .background(Color.black)
-//    }
-//}
