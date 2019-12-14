@@ -55,7 +55,8 @@ struct FlowerAnimatableViewModifier: AnimatableModifier {
     }
     
     private var radius: Double {
-           return Double(min(rect.width, rect.height))/4.0
+        let diameter = Double(min(rect.width, rect.height))/2.0
+        return diameter/2.0
     }
     
     func body(content: Content) -> some View {
@@ -85,13 +86,18 @@ struct FlowerAnimatableViewModifier: AnimatableModifier {
         return self.getOffset(centerPoint)
     }
     
+    /*
+     We remove 2*radius instead of radius alone,
+     because the views are already being drawed
+     on the center of the container
+     */
     func getOffset(_ center: CGPoint) -> CGPoint {
-        return CGPoint(x: Double(center.x) - radius/2, y: Double(center.y) - radius/2)
+        return CGPoint(x: Double(center.x) - 2*radius, y: Double(center.y) - 2*radius)
     }
     
     func getPetalCenteres() -> [CGPoint] {
         let h = radius
-        let center = CGPoint(x: h/2, y: h/2)
+        let center = CGPoint(x: rect.width/2, y: rect.height/2)
         
         var points: [CGPoint] = []
         
@@ -111,9 +117,10 @@ struct FlowerAnimatableViewModifier: AnimatableModifier {
 #if DEBUG
 struct FlowerContentView_Previews : PreviewProvider {
     static var previews: some View {
-        Color.black.overlay(
-            FlowerAnimatableView(sides: 6, size: 400, scale: 0.1)
-            .frame(width: 400, height: 400)).background(Color.red)
+        Color.gray.overlay(
+            FlowerAnimatableView(sides: 7, size: 380, scale: 1.0)
+                    .frame(width: 400, height: 400).background(Color.black)
+        )
     }
 }
 #endif
