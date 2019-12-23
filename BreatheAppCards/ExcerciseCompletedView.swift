@@ -11,11 +11,11 @@ import SwiftUI
 struct ExcerciseCompletedView: View {
     @State var shown: Bool = false
     private let animationTime = 0.8
+    var action: (() -> Void)?
     
     var body: some View {
         Color.black.overlay(
             VStack(alignment: .leading) {
-                Spacer(minLength: 250.0)
                 if shown {
                     FlowerAnimatableView(sides: 6,size: 65,scale: 1.0)
                         .frame(width: 65, height: 65)
@@ -26,13 +26,12 @@ struct ExcerciseCompletedView: View {
                     LabelView()
                         .animation(Animation.easeInOut(duration: animationTime).delay(animationTime/2))
                         .transition(AnyTransition.opacity.combined(with: .offset(x: 0, y: 80)))
-                    Spacer()
-                    ButtonView()
+                    Spacer().frame(height: 170)
+
+                    Button(action: { self.action?() }, label: {return ButtonView()})
                         .animation(Animation.easeInOut(duration: animationTime).delay(animationTime/1.5))
                         .transition(AnyTransition.opacity.combined(with: .offset(x: 0, y: 80)))
                 }
-                
-                Spacer(minLength: 150)
             }
             .background(Color.black)
             .padding(.horizontal, 40)
@@ -41,18 +40,24 @@ struct ExcerciseCompletedView: View {
                 self.shown = true
             })
     }
+    
+    public func onAction(action: @escaping () -> Void) -> ExcerciseCompletedView {
+        var view = self
+        view.action = action
+        return view
+    }
+    
 }
+
 
 fileprivate struct ButtonView: View {
     var body: some View {
-        Button(action: {}, label: {
-            Text("Complete")
-                .bold()
-                .foregroundColor(Color.white)
-                .frame(maxWidth: .infinity, minHeight: 50)
-                .background(Color.customGreenColor)
-                .cornerRadius(8)
-        })
+        Text("Complete")
+            .bold()
+            .foregroundColor(Color.white)
+            .frame(maxWidth: .infinity, minHeight: 55)
+            .background(Color.customGreenColor)
+            .cornerRadius(8)
     }
 }
 
@@ -72,3 +77,13 @@ fileprivate struct LabelView: View {
     }
 }
 
+
+#if DEBUG
+struct ExcerciseCompletedView_Previews : PreviewProvider {
+    static var previews: some View {
+        Color.black.overlay(
+            ExcerciseCompletedView()
+        )
+    }
+}
+#endif

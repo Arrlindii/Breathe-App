@@ -61,7 +61,7 @@ struct ContentView : View {
             }
             
             if isExcerciseCompletedPresented {
-                ExcerciseCompletedView().onTapGesture {
+                ExcerciseCompletedView().onAction {
                     self.isDetailsPresented = false
                     self.isCardStackPresented = true
                     self.isExcerciseCompletedPresented = false
