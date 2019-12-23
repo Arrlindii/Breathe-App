@@ -117,9 +117,9 @@ struct FlowerAnimatableViewModifier: AnimatableModifier {
 #if DEBUG
 struct FlowerContentView_Previews : PreviewProvider {
     static var previews: some View {
-        Color.gray.overlay(
+        Color.black.overlay(
             FlowerAnimatableView(sides: 7, size: 380, scale: 1.0)
-                    .frame(width: 400, height: 400).background(Color.black)
+                    .frame(width: 250, height: 250).background(Color.black)
         )
     }
 }

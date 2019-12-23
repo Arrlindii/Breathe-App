@@ -15,17 +15,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Breathe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kF-Fa-qnq">
-                                <rect key="frame" x="123" y="425.5" width="168" height="55"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="46"/>
-                                <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="breatheFlower" translatesAutoresizingMaskIntoConstraints="NO" id="wYU-jc-OHY">
+                                <rect key="frame" x="79" y="325" width="256" height="256"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
-                            <constraint firstItem="3kF-Fa-qnq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Hn5-fh-jx6"/>
-                            <constraint firstItem="3kF-Fa-qnq" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="SaL-Vw-0NK"/>
+                            <constraint firstItem="wYU-jc-OHY" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="246-i4-oAb"/>
+                            <constraint firstItem="wYU-jc-OHY" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="QcE-sm-gsl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -35,4 +32,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="breatheFlower" width="256" height="256"/>
+    </resources>
 </document>
