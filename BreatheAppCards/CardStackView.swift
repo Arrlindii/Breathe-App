@@ -23,12 +23,12 @@ struct Card: Identifiable {
     }
 }
 
-struct DraggableCardView<T: View>: View {
-    var contentView: T
+struct DraggableCardView<Content: View>: View {
+    var contentView: Content
     @Binding var card: Card
     
     private let minimumY: CGFloat = 0
-    private let maximumY: CGFloat = UIScreen.main.bounds.height*0.65
+    private let maximumY: CGFloat = UIScreen.main.bounds.height*0.67
     
     var body: some View {
         let dragGesture = DragGesture().onChanged({ value in
@@ -62,10 +62,10 @@ struct DraggableCardView<T: View>: View {
     }
 }
 
-struct CardStackView<T: View>: View {
+struct CardStackView<Content: View>: View {
     @Binding var cards: [Card]
     var onCardSelected: ((Card) -> Void)
-    var cardContentViews: [T]
+    var cardContentViews: [Content]
     
     private var bottomnCards: [Card] {
         return cards.filter {
@@ -109,7 +109,7 @@ struct CardStackView<T: View>: View {
            
         return cardView
             .padding(.horizontal, 30)
-            .padding(.vertical, 160)
+            .padding(.vertical, (UIScreen.main.bounds.height*0.4)/2)
             .offset(y: offset)
             .scaleEffect(scale)
             .zIndex(Double(zIndex)
