@@ -60,7 +60,7 @@
 		0E897F5623428FAF0022A622 = {
 			isa = PBXGroup;
 			children = (
-				0E897F6123428FAF0022A622 /* BreatheAppCards */,
+				0E897F6123428FAF0022A622 /* BreatheApp */,
 				0E897F6023428FAF0022A622 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,7 +73,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0E897F6123428FAF0022A622 /* BreatheAppCards */ = {
+		0E897F6123428FAF0022A622 /* BreatheApp */ = {
 			isa = PBXGroup;
 			children = (
 				0E897F6223428FAF0022A622 /* AppDelegate.swift */,
@@ -94,7 +94,7 @@
 				0E897F7023428FB30022A622 /* Info.plist */,
 				0E897F6A23428FB30022A622 /* Preview Content */,
 			);
-			path = BreatheAppCards;
+			path = BreatheApp;
 			sourceTree = "<group>";
 		};
 		0E897F6A23428FB30022A622 /* Preview Content */ = {
@@ -108,9 +108,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0E897F5E23428FAF0022A622 /* BreatheAppCards */ = {
+		0E897F5E23428FAF0022A622 /* BreatheApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0E897F7323428FB30022A622 /* Build configuration list for PBXNativeTarget "BreatheAppCards" */;
+			buildConfigurationList = 0E897F7323428FB30022A622 /* Build configuration list for PBXNativeTarget "BreatheApp" */;
 			buildPhases = (
 				0E897F5B23428FAF0022A622 /* Sources */,
 				0E897F5C23428FAF0022A622 /* Frameworks */,
@@ -120,7 +120,7 @@
 			);
 			dependencies = (
 			);
-			name = BreatheAppCards;
+			name = BreatheApp;
 			productName = BreatheAppCards;
 			productReference = 0E897F5F23428FAF0022A622 /* Breathe.app */;
 			productType = "com.apple.product-type.application";
@@ -140,7 +140,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0E897F5A23428FAF0022A622 /* Build configuration list for PBXProject "BreatheAppCards" */;
+			buildConfigurationList = 0E897F5A23428FAF0022A622 /* Build configuration list for PBXProject "BreatheApp" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -153,7 +153,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0E897F5E23428FAF0022A622 /* BreatheAppCards */,
+				0E897F5E23428FAF0022A622 /* BreatheApp */,
 			);
 		};
 /* End PBXProject section */
@@ -325,10 +325,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"BreatheAppCards/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BreatheApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 7V3537E45N;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = BreatheAppCards/Info.plist;
+				INFOPLIST_FILE = BreatheApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -345,10 +345,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"BreatheAppCards/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"BreatheApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 7V3537E45N;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = BreatheAppCards/Info.plist;
+				INFOPLIST_FILE = BreatheApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -363,7 +363,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0E897F5A23428FAF0022A622 /* Build configuration list for PBXProject "BreatheAppCards" */ = {
+		0E897F5A23428FAF0022A622 /* Build configuration list for PBXProject "BreatheApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0E897F7123428FB30022A622 /* Debug */,
@@ -372,7 +372,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0E897F7323428FB30022A622 /* Build configuration list for PBXNativeTarget "BreatheAppCards" */ = {
+		0E897F7323428FB30022A622 /* Build configuration list for PBXNativeTarget "BreatheApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0E897F7423428FB30022A622 /* Debug */,
